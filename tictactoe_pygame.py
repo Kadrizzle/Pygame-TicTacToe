@@ -31,6 +31,7 @@ seventh_slot = pygame.draw.rect(screen, (255,255,255), (100, 274, 74, 74))
 eigth_slot = pygame.draw.rect(screen, (255,255,255), (175, 274, 99, 74))
 ninth_slot = pygame.draw.rect(screen, (255,255,255), (275, 274, 74, 74))
 open_spots = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+player_spots = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 #Circle coordinates is necessary so I'll be able to have a method for the computer to play instead of manually writing down every move for the computer
 #This will make more sense later when you actually go to type the method for the computer
 circle_coordinates = [(135,135) , (228,135) , (320,135) , (135,225) , (228,225) , (320,225) , (135,315)  ,(228,315) , (320,315)]
@@ -63,11 +64,29 @@ def computer_play(open_spots, first_move):
                 pygame.draw.circle(screen, pygame.Color(240,157,81), circle_coordinates[rand_number], (40), width = 6)
                 open_spots[rand_number] = 1
                 break
-    #else:
-        #first_number = 0
-        #second_number = 1
-        #for x in open_spots:
-
+    else:
+        first_number = 0
+        second_number = 1
+        for x in player_spots:
+            if player_spots[first_number] == 1 and player_spots[second_number] == 1:
+                pygame.draw.circle(screen, pygame.Color(240,157,81), circle_coordinates[second_number + 1], (40), width = 6)
+                open_spots[second_number + 1] = 1
+                if x == 2:
+                    first_number = 0
+                    second_number = 0
+                first_number += 3 #0 = 3,4... 1 = 6,7... 2 = 9,10
+                second_number += 3
+                if x == 2:
+                    first_number = 1
+                    second_number = 2
+                    if player_spots[first_number] == 1 and player_spots[second_number] == 1:
+                        pygame.draw.circle(screen, pygame.Color(240,157,81), circle_coordinates[first_number - 1], (40), width = 6)
+                        open_spots[first_number - 1] = 1
+                        first_number += 3
+                        second_number += 3
+                        if x == 5: 
+                            break
+                
             
     
 pygame.init()
@@ -89,6 +108,7 @@ while running:
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (105, 105), (170, 170), width = 6)
             pygame.draw.line(screen, pygame.Color(64,61,88), (170, 105), (105, (screen_y /2) - 55), width = 6)
             open_spots[0] = 1
+            player_spots[0] = 1
             computer_play(open_spots, first_move)
             first_move = False
             
@@ -96,6 +116,7 @@ while running:
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (195,105), (260, 170), width = 6)
             pygame.draw.line(screen, pygame.Color(64,61,88), (260, 105), (195, 170), width = 6) 
             open_spots[1] = 1
+            player_spots[1] = 1
             computer_play(open_spots, first_move)
             first_move = False
                
@@ -103,6 +124,7 @@ while running:
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (285,105), (350,170), width = 6)
             pygame.draw.line(screen, pygame.Color(64,61,88), (285,170),(350,105), width = 6) 
             open_spots[2] = 1
+            player_spots[2] = 1
             computer_play(open_spots, first_move)
             first_move = False
                 
@@ -110,6 +132,7 @@ while running:
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (105,190), (170, 255), width = 6)
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (170,190), (105, 255), width = 6)
             open_spots[3] = 1
+            player_spots[3] = 1 
             computer_play(open_spots, first_move)
             first_move = False
     
@@ -117,6 +140,7 @@ while running:
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (195,190), (260, 255), width = 6)
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (260,190), (195, 255), width = 6)
             open_spots[4] = 1
+            player_spots[4] = 1
             computer_play(open_spots, first_move)
             first_move = False 
     
@@ -124,6 +148,7 @@ while running:
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (285,190), (350,255), width = 6)
             pygame.draw.line(screen, pygame.Color(64,61,88), (285,255),(350,190), width = 6)
             open_spots[5] = 1
+            player_spots[5] = 1
             computer_play(open_spots, first_move)
             first_move = False
 
@@ -131,6 +156,7 @@ while running:
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (105,280), (170, 345), width = 6)
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (170,280), (105, 345), width = 6)
             open_spots[6] = 1
+            player_spots[6] = 1
             computer_play(open_spots, first_move)
             first_move = False 
 
@@ -138,6 +164,7 @@ while running:
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (195,280), (260, 345), width = 6)
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (260,280), (195, 345), width = 6) 
             open_spots[7] = 1
+            player_spots[7] = 1
             computer_play(open_spots, first_move)
             first_move = False
 
@@ -145,6 +172,7 @@ while running:
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (285,280), (350, 345), width = 6)
             pygame.draw.line(screen, pygame.Color(64, 61, 88), (285,345), (350, 280), width = 6)
             open_spots[8] = 1
+            player_spots[8] = 1
             computer_play(open_spots, first_move)
             first_move = False
 
